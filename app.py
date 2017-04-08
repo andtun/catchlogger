@@ -20,4 +20,8 @@ def login():
 def f(root, filename):
     return page_file(root, filename)
 
+@get("/check")
+def chk():
+    return str(request.headers)
+    
 run(host="0.0.0.0", port=os.environ.get('PORT', 5000), debug=True)

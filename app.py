@@ -6,7 +6,7 @@ def page_file(root, filename):
 
 def html(filename):
 	filename += ".html"
-	return static_file(filename, root="./html/")
+	return static_file(filename, root="./html/")    
 
 @get("/")
 def man():
@@ -28,10 +28,13 @@ def chk():
 
 @get("/redirtry/<whereto>")
 def redir(whereto):
+    print(whereto)
     whereto = "https://"+whereto
     redirect(whereto)
     for i in range(100000):
         print("redirok")
+
+#@get("/tryshortlink/<whereto>")
 
         
 

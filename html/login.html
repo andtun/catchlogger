@@ -25,6 +25,16 @@
       document.getElementById("login").innerHTML = "Войти"
     }
 
+    function is_valid_url(f)
+{
+     var urls;
+     urls = document.getElementById("uname").value
+     console.log(urls)
+     if (urls.match(/^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/)) {f.submit();}
+     else {alert("notok URL")}
+}
+
+
     </script>
   </head>
   <body>
@@ -60,9 +70,9 @@
           <div class="row">
             <div class="banner-info text-center wow fadeIn delay-05s">
             <h2>Вход в аккаунт</h2>
-<form class="contactform" action="/login" method="POST">
+<form class="contactform" action="/login" method="POST" onsubmit="is_valid_url(this); return false;">
 <div class="form-group">
-<input type="text" placeholder="Логин" name="login" class="form-control">
+<input type="text" placeholder="Логин" name="login" id="uname" class="form-control">
 </div>
 <div class="form-group">
 <input type="password" placeholder="Пароль" name="pw" class="form-control">

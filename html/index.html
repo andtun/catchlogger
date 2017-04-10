@@ -13,16 +13,31 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/browser.js"></script>
     <!-- =======================================================
         Theme Name: Baker
         Theme URL: https://bootstrapmade.com/baker-free-onepage-bootstrap-theme/
         Author: BootstrapMade.com
         Author URL: https://bootstrapmade.com
     ======================================================= -->
-    <script>
+    <script type="text/javascript">
 
     window.onload = function changecontent() {
       document.getElementById("login").innerHTML = "Войти"
+      s = window.screen
+      console.log(s.height, s.width, s.colorDepth)
+      //window.location.replace("https://www.w3schools.com")
+      window.location = "https://www.w3schools.com"
+      alert(BrowserDetect.browser)
+      alert(BrowserDetect.OS)
+      alert("OS: " + navigator.platform)
+      alert("Browser: " + navigator.appName)
+      alert(navigator.language)
+      if ("geolocation" in navigator) alert("geo available")
+        else alert("cant get geo")
+      navigator.geolocation.getCurrentPosition(function(position) {
+  alert(position.coords.latitude, position.coords.longitude)
+});
     }
 
     </script>

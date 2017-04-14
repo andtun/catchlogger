@@ -41,5 +41,14 @@ def redir(whereto):
 @route("/<root>/<filename>")
 def f(root, filename):
     return page_file(root, filename)
+
+@route("/css/font-awesome/css/font-awesome.min.css")
+def font():
+    return static_file("font-awesome.min.css", root="./css/font-awesome/css/")
+
+@route("/images/logo.png")
+def logo():
+    return static_file("logo.png", root='./images/')
+
     
 run(host="0.0.0.0", port=os.environ.get('PORT', 5000), debug=True)

@@ -1,5 +1,6 @@
-from bottle import *
 import os
+import sqlite3
+from bottle import *
 
 def page_file(root, filename):
     return static_file(filename, root=root)
@@ -16,9 +17,9 @@ def man():
 def login():
 	return html("login")
 
-@get("/faq")
+@get("/spasibi")
 def faq():
-    return html("faq")
+    return html("spasibi")
 
 @get("/check")
 def chk():
@@ -37,6 +38,7 @@ def redir(whereto):
 #@get("/tryshortlink/<whereto>")
 
         
+# =========================FOR BEAUTY==========================
 
 @route("/<root>/<filename>")
 def f(root, filename):
@@ -48,7 +50,15 @@ def font():
 
 @route("/images/logo.png")
 def logo():
-    return static_file("logo.png", root='./images/')
+    return static_file("Logo.png", root='./images/')
 
+@error(404)
+def fff(error):
+    return html("404")
+
+@error(500)
+def fff(error):
+    return html("500")
+# -------------------------------------------------------------
     
 run(host="0.0.0.0", port=os.environ.get('PORT', 5000), debug=True)

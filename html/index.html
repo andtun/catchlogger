@@ -203,12 +203,12 @@
       <div class="col-md-12">
         <h1>Подробнее о сервисе</h1>
         <h2>Как <a href="#">создать ссылку? </a></h2>
-        <p>Вводите сайт, на который она ведёт. Выбираете, как получать информацию о всех проходах по ссылке. Нажимаете кнопочку и получаете ссылку, которую затем можете, например, отправить другу:) <br>
+        <p>Вводите сайт, на который она ведёт. Вводите свой email - на него будет приходить информация о проходах по ссылке, если у Вас нет аккаунта в той системе. Выбираете сервис, с помощью которого будет сгенерирована короткая ссылка. Нажимаете кнопочку и получаете ссылку, которую затем можете, например, отправить другу:) <br>
           <br>
           <br>
         </p>
         <h2>Как получать информацию о проходящих по ссылке?</h2>
-        <p>Если <a href="#modal"><b>войти/зарегистрироваться, </b></a> информацию о всех, кто пройдёт по ссылке, можно посмотреть на этом сайте. <b>Незарегистрированным</b> пользователям информация о каждом проходе будет приходить на email. <br>
+        <p>Если <a href="#top"><b>войти/зарегистрироваться, </b></a> информацию о всех, кто пройдёт по ссылке, можно посмотреть на этом сайте. <b>Незарегистрированным</b> пользователям информация о каждом проходе будет приходить на email. <br>
           <br>
           <br>
         </p>
@@ -239,15 +239,15 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 domin-head">
-        <h1>Search for a domain</h1>
+        <h1>Создать ссылку</h1>
       </div>
     </div>
     <div class="row">
       <div class="col-md-8 col-md-offset-2" >
         <div class="input-append">
         <form action="/createlink/by_email" method="GET">
-        <input style="width: 97%; margin-bottom: 20px;" type="email" name="email" id="address"  required="required" class="newsletter-form" placeholder="Enter your email address" data-validate="validate(required, email)">
-          <input class="search" type="text" name="link_addr" placeholder="Enter your domain name" style="height: 58px;">
+        <input style="width: 97%; margin-bottom: 20px;" type="email" name="email" id="address"  required="required" class="newsletter-form" placeholder="Адрес email" data-validate="validate(required, email)">
+          <input class="search" type="text" name="link_addr" placeholder="Сайт, на который будет вести ссылка" style="height: 58px;">
           <div class="btn-group">
             <select name="shorturl_prov" class="btn dropdown-toggle" data-toggle="dropdown" style="height: 58px;"> ?? <span class="caret"></span>
 
@@ -256,7 +256,7 @@
             </select>
           </div>
         </div>
-        <p class="search-area"> <button type="submit" class="search-btn">Search Domain </button> </p>
+        <p class="search-area"> <button type="submit" class="search-btn">Создать! </button> </p>
         </form>
       </div>
     </div>

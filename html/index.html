@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -50,7 +50,42 @@
       <script src="js/respond.min.js"></script>
     <![endif]-->
 
-<!-- Custom styles for this template -->
+ <script type="text/javascript">
+
+    window.onload = function changecontent() {
+      document.getElementById("login").innerHTML = "Войти"
+    }
+
+    function is_valid_url(f)
+{
+     var urls;
+     urls = document.getElementById("uname").value
+     console.log(urls)
+     if (urls.match(/^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/)) {f.submit();}
+     else {alert("notok URL")}
+}
+
+
+    window.onload = function changecontent() {
+      //document.getElementById("login").innerHTML = "Войти"
+      s = window.screen
+      console.log(s.height, s.width, s.colorDepth)
+      //window.location.replace("https://www.w3schools.com")
+      //window.location = "https://www.w3schools.com"
+      alert(BrowserDetect.browser)
+      alert(BrowserDetect.OS)
+      alert("OS: " + navigator.platform)
+      alert("Browser: " + navigator.appName)
+      alert(navigator.language)
+      if ("geolocation" in navigator) alert("geo available")
+        else alert("cant get geo")
+      navigator.geolocation.getCurrentPosition(function(position) {
+  alert(position.coords.latitude, position.coords.longitude)
+});
+    }
+
+    
+    </script>
 
 </head>
 
@@ -245,7 +280,7 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2" >
         <div class="input-append">
-        <form action="/createlink/by_email" method="GET">
+        <form action="/createlink/by_email" onsubmit="javascript:is_valid_url(this);" method="GET">
         <input style="width: 97%; margin-bottom: 20px;" type="email" name="email" id="address"  required="required" class="newsletter-form" placeholder="Адрес email" data-validate="validate(required, email)">
           <input class="search" type="text" name="link_addr" placeholder="Сайт, на который будет вести ссылка" style="height: 58px;">
           <div class="btn-group">

@@ -27,7 +27,7 @@ def chk():
     	print("Auth HEADER!:", request.get_header(i, default='no_header'))
     return "OK"
 
-@get("/redirtry/<whereto>")
+@get("/link/<whereto>")
 def redir(whereto):
     print(whereto)
     whereto = "https://"+whereto
@@ -36,6 +36,15 @@ def redir(whereto):
         print("redirok")
 
 #@get("/tryshortlink/<whereto>")
+
+
+@get("/redir302")
+def r():
+    redirect("http://yandex.ru", code=302)
+
+@get("/redir301")
+def r():
+    redirect("http://yandex.ru", code=301)
 
         
 # =========================FOR BEAUTY==========================

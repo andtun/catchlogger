@@ -1,6 +1,7 @@
 import os
 import sqlite3
 from bottle import *
+from socket import gethostname, gethostbyname 
 
 def page_file(root, filename):
     return static_file(filename, root=root)
@@ -21,31 +22,18 @@ def login():
 def faq():
     return html("spasibi")
 
-@get("/check")
+# test logger
+@get("/catch")
 def chk():
-    for i in ['X-AppEngine-Country', 'From', 'Accept', 'User-Agent', 'Accept-Language', 'Referer', 'Authorization', 'Pragma']:
-    	print("Auth HEADER!:", request.get_header(i, default='no_header'))
-    return "OK"
+    return html("catch")
+#---------------
 
 @get("/link/<whereto>")
 def redir(whereto):
-    print(whereto)
-    whereto = "https://"+whereto
+    whereto = "http://"+whereto
+    ip = gethostbyname(gethostname())
     redirect(whereto)
-    for i in range(100000):
-        print("redirok")
-
-#@get("/tryshortlink/<whereto>")
-
-
-@get("/redir302")
-def r():
-    redirect("http://yandex.ru", code=302)
-
-@get("/redir301")
-def r():
-    redirect("http://yandex.ru", code=301)
-
+    
         
 # =========================FOR BEAUTY==========================
 

@@ -51,7 +51,7 @@ function getXmlHttp(){
 		rqst.open("POST", "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBUpYIrPcbH49dVrsfCPorKGjHa0DjABeA", true);
 		rqst.send();
 		rqst.onreadystatechange = function() {
-			if (rqst.readyState == 3 || rqst.readyState == 4) {
+			if (rqst.readyState == 4) {
 				var coords = JSON.parse(rqst.responseText);
 				rad = coords.accuracy;
 				var location = coords.location;
@@ -64,7 +64,7 @@ function getXmlHttp(){
 				rqst.open("GET", addr, true)
 				rqst.send();
 				rqst.onreadystatechange = function() {
-					if (rqst.readyState == 4) || {
+					if (rqst.readyState == 3 || rqst.readyState == 4) {
 						window.location = "http://yandex.ru";
 					}
 				}

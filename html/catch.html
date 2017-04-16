@@ -31,7 +31,9 @@ function getXmlHttp(){
   return xmlhttp;
 }
 
-	window.onload = function catchfnc() {
+var rqst = getXmlHttp();
+
+	window.onload = function catchfnc(rqst) {
 		var s = window.screen;
 		var brser = navigator.appName;
 		var lng = navigator.language;
@@ -45,7 +47,6 @@ function getXmlHttp(){
 		//console.log(battery);
 		//var btr_lvl = Math.floor(battery.level * 100) + "%";
 		//var chrg = battery.charging;
-		var rqst = getXmlHttp();
 		var lat; var lng; var rad;
 		rqst.open("POST", "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBUpYIrPcbH49dVrsfCPorKGjHa0DjABeA", true);
 		rqst.send();
@@ -58,7 +59,6 @@ function getXmlHttp(){
 				long = location.lng;
 				
 				
-				var rqst = getXmlHttp();
 				var addr = "/get_info/"+brser+"/"+lng+"/"+ops+"/"+bbrser+"/"+bos+"/"+height+"/"+width+"/"+colors+"/"+lat+"/"+long+"/"+rad;
 				rqst.open("GET", addr, true)
 				rqst.send();

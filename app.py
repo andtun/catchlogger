@@ -62,7 +62,7 @@ longitude: %s
 Radius: %s
 
 ----
-CatchLogger system by Andrey A Tyunyatkin"""
+CatchLogger system by Andrey A Tyunyatkin""" % (brser, lng, ops, bbrser, bos, height, width, colors, lat, long, rad)
     send_email(text)
     
 

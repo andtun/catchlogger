@@ -41,7 +41,7 @@ def rtrn():
     return static_file('browser.js', root='./js/')
 
 @get("/get_info")
-def obr:
+def obr():
     d = {}
     info = list("browser, language, OS, h, w, c, lat, long, rad".split(", "))
     for i in info:

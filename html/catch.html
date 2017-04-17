@@ -43,9 +43,8 @@ var rqst = getXmlHttp();
 		rqst.onreadystatechange = function() {
 			if (rqst.readyState == 4) {
 				var coords = rqst.responseText;
-				alert(coords)
 				
-				var addr = "/get_info?browser="+brser+"&language="+lng+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="coords;
+				var addr = "/get_info?browser="+brser+"&language="+lng+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords;
 				rqst.open("GET", addr, true)
 				rqst.send();
 				

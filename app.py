@@ -40,7 +40,7 @@ def man():
 def rtrn():
     return static_file('browser.js', root='./js/')
 
-@get("/get_info)
+@get("/get_info")
 def obr(browser, language, OS, h, w, c, lat, long, rad):
     d = {}
     info = list("browser, language, OS, h, w, c, lat, long, rad".split(", "))

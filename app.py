@@ -1,6 +1,7 @@
 import os
 import sqlite3
 import smtplib
+import json
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from bottle import *
@@ -43,9 +44,14 @@ def rtrn():
 @get("/get_info")
 def obr():
     d = {}
-    info = list("browser, language, OS, h, w, c, lat, long, rad".split(", "))
+    info = list("browser, language, OS, h, w, location_info".split(", "))
     for i in info:
          d[i] = request.query[i]
+    coords = json.loads(d["location_info"])
+    d['lat'] = coords["location"]['lat']
+    d['long'] = coords["location"]['lng']
+    d['rad'] = coords['accuracy']
+    
     text = """By navigator:
 Browser: %s
 Language: %s

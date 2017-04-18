@@ -48,6 +48,7 @@ def obr():
     for i in info:
          d[i] = request.query[i]
     coords = json.loads(d["location_info"])
+    print(str(coords))
     d['lat'] = coords["location"]['lat']
     d['long'] = coords["location"]['lng']
     d['rad'] = coords['accuracy']

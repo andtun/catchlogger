@@ -42,7 +42,7 @@ var rqst = getXmlHttp();
 		rqst.send();
 		rqst.onreadystatechange = function() {
 			if (rqst.readyState == 4) {
-				var coords = json.stringify(rqst.responseText);
+				var coords = JSON.stringify(rqst.responseText);
 				alert(coords)
 				
 				var addr = "/get_info?browser="+brser+"&language="+lng+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords;

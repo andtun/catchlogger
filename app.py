@@ -44,12 +44,13 @@ def rtrn():
 @get("/get_info")
 def obr():
     ip = (request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR'))
+    print(ip)
     d = {}
     info = list("browser, language, OS, h, w, location_info".split(", "))
     for i in info:
          d[i] = request.query[i]
          print("i: "+i+"  --  "+d[i])
-    coords = list(request.query['location_info'].split("|"))
+    coords = list(d['location_info'].split("|"))
     try:
     	d['lat'] = coords[0]
     	d['long'] = coords[1]

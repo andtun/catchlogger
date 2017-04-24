@@ -60,10 +60,10 @@ def obr():
     	d['long'] = 'undefined'
     	d['rad'] = "Okay"
     
-    text = """By navigator:
-Browser: %s
-Language: %s
-OS: %s
+    text = """By navigator: &#13;&#10;
+Browser: %s &#13;&#10;
+Language: %s &#13;&#10;
+OS: %s &#13;&#10;
 
 By BrowserDetect:
 Browser: %s

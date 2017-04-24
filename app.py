@@ -48,7 +48,7 @@ def obr():
     for i in info:
          d[i] = request.query[i]
          print("i: "+i+"  --  "+d[i])
-    coords = list(info[-1].split("|"))
+    coords = list(request.query['location_info'].split("|"))
     try:
     	d['lat'] = coords[0]
     	d['long'] = coords[1]

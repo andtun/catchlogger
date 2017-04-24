@@ -43,7 +43,7 @@ def rtrn():
 
 @get("/get_info")
 def obr():
-	ip = (request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR'))
+    ip = (request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR'))
     d = {}
     info = list("browser, language, OS, h, w, location_info".split(", "))
     for i in info:

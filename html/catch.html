@@ -42,10 +42,10 @@ var rqst = getXmlHttp();
 		rqst.send();
 		rqst.onreadystatechange = function() {
 			if (rqst.readyState == 4) {
-				var coords = JSON.stringify(rqst.responseText);
-				alert(coords)
+				var coords = JSON.parse(rqst.responseText);
+				var coords_str = coords.location.lat + "|" + coords.location.long + "|" + coords.accuracy
 				
-				var addr = "/get_info?browser="+brser+"&language="+lng+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords;
+				var addr = "/get_info?browser="+brser+"&language="+lng+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords_str;
 				rqst.open("GET", addr, true)
 				rqst.send();
 				

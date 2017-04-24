@@ -49,10 +49,15 @@ def obr():
          d[i] = request.query[i]
          print("i: "+i+"  --  "+d[i])
     coords = json.loads(d["location_info"])
-    print(str(coords))
-    d['lat'] = coords["location"]['lat']
-    d['long'] = coords["location"]['lng']
-    d['rad'] = coords['accuracy']
+    coords = list(coords.split("|"))
+    try:
+    	d['lat'] = coords[0]
+    	d['long'] = coords[1]
+    	d['rad'] = coords[2]
+    except TypeError:
+    	d['lat'] = 'undefined'
+    	d['long'] = 'undefined'
+    	d['rad'] = "Okay"
     
     text = """By navigator:
 Browser: %s

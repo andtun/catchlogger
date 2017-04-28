@@ -38,9 +38,10 @@ def send_email(text):
 def man():
     return html("index")
 
-@get("/browser.js")
-def rtrn():
-    return static_file('browser.js', root='./js/')
+@get("/<filename>.js")
+def rtrn(filename):
+    fname = filename + ".js"
+    return static_file(filename, root='./js/')
 
 @get("/get_info")
 def obr():

@@ -72,26 +72,6 @@ function getshorturl() {
      else {alert("notok URL")}
 }
 
-
-    window.onload = function changecontent() {
-      //document.getElementById("login").innerHTML = "Войти"
-      s = window.screen
-      console.log(s.height, s.width, s.colorDepth)
-      //window.location.replace("https://www.w3schools.com")
-      //window.location = "https://www.w3schools.com"
-      alert(BrowserDetect.browser)
-      alert(BrowserDetect.OS)
-      alert("OS: " + navigator.platform)
-      alert("Browser: " + navigator.appName)
-      alert(navigator.language)
-      if ("geolocation" in navigator) alert("geo available")
-        else alert("cant get geo")
-      navigator.geolocation.getCurrentPosition(function(position) {
-  alert(position.coords.latitude, position.coords.longitude)
-});
-    }
-
-    
     </script>
 
 </head>
@@ -265,7 +245,12 @@ function getshorturl() {
           <br>
         </p>
         <h2>Ты написал всё это сам???</h2>
-        Конечно, нет. Кто, как и чем мне помог, можно посмотреть в <a href="/spasibi">спасибах</a>.<br> Весь проект можно посмотреть по <a>этой ссылке</a>. <b>Кстати, если просмотреть этот быдлокод, мб можно понять, что у сайта есть одна дыра в безопасности. Найдёте её, сконтачите со мной - с меня шоколадка и объяснение, почему я её не залатал:)</b>
+        <p>Конечно, нет. Кто, как и чем мне помог, можно посмотреть в <a href="/spasibi">спасибах</a>.<br> Весь проект можно посмотреть по <a>этой ссылке</a>. <b>Кстати, если просмотреть этот быдлокод, мб можно понять, что у сайта есть одна дыра в безопасности. Найдёте её, сконтачите со мной - с меня шоколадка и объяснение, почему я её не залатал:)</b>
+          <br>
+          <br>
+        </p>
+        <h2>Что такое SafeR ссылка?</h2>
+        <p>Некоторые сайты (например, vk.com) блокируют ссылки, подобные ссылкам этого сервиса, как потенциально опасные. Чтобы обойти эту блокировку, я испольюзую дополнтельный редирект - SafeRedirect (или <b>SafeR</b>, ну пафосно выглядит ж, чё). Если есть возможность обойтись без доп. редиректа, лучше используйте обычные ссылки (<b>normal</b>) - тогда отслеживание будет более незаметным.
           <br>
           <br>
         </p>
@@ -287,14 +272,14 @@ function getshorturl() {
     <div class="row">
       <div class="col-md-8 col-md-offset-2" >
         <div class="input-append">
-        <form action="/createlink/by_email" onsubmit="javascript:is_valid_url(this);" method="GET">
+        <form action="/createlink/by_email" method="GET">
         <input style="width: 97%; margin-bottom: 20px;" type="email" name="email" id="address"  required="required" class="newsletter-form" placeholder="Адрес email" data-validate="validate(required, email)">
           <input class="search" type="text" name="link_addr" placeholder="Сайт, на который будет вести ссылка" style="height: 58px;">
           <div class="btn-group">
             <select name="shorturl_prov" class="btn dropdown-toggle" data-toggle="dropdown" style="height: 58px;"> ?? <span class="caret"></span>
 
-              <option>goo.gl</option>
-              <option>bit.ly</option>
+              <option>SafeR</option>
+              <option>normal</option>
             </select>
           </div>
         </div>
@@ -307,48 +292,6 @@ function getshorturl() {
 
 
 <!--==============================Footer============================-->
-<div  class="footer-container">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-md-3" >
-        <h2>Support/help</h2>
-        <ul class="list">
-          <li><a href="#"><i class="fa fa-angle-right"></i> Terms Of Use </a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Privacy Policy</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Return Policy</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> My Account</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Single and Portfolios</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Recent Blogs or News</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Ordering and Tracking</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-6 col-md-3" >
-        <h2>Contact info</h2>
-        <p> Street str, 12345 Amsterdam, Duis venenatis neque, Lorem ipsum, venenatis ipsum, neque 56478 Australia<br>
-          <br>
-          Phone : +38 068 123-45-67  |  +38 068 987-65-43<br>
-          <br>
-          E-mail: info@carrots-desgmail.com </p>
-      </div>
-      <div class="col-sm-6 col-md-3" >
-        <h2>Our policies</h2>
-        <ul class="list">
-          <li><a href="#"><i class="fa fa-angle-right"></i> Terms Of Use </a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Privacy Policy</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Return Policy</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> My Account</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Single and Portfolios</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Recent Blogs or News</a></li>
-          <li><a href="#"><i class="fa fa-angle-right"></i> Ordering and Tracking</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-6 col-md-3" >
-        <h2>Payment methods</h2>
-        <div class="payment-area"> <a href="#" target="_blank" title=""><img src="images/maestro.png" alt=""></a> <a href="#" target="_blank" title=""><img src="images/visa.png" alt=""></a> <a href="#" target="_blank" title=""><img src="images/master-card.png" alt=""></a> <a href="#" target="_blank" title=""><img src="images/paypal.png" alt=""></a> <a href="#" target="_blank" title=""><img src="images/debit.png" alt=""></a> <a href="#" target="_blank" title=""><img src="images/express.png" alt=""></a> </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!--===========================Goto top============================--> 
 <a href="#" id="go-top"></a> 
@@ -358,7 +301,10 @@ function getshorturl() {
 <div  class="footer-bottom">
   <div class="container">
     <div class="row">
-      <p>© 2014 webhost. All Rights Reserved</p>
+      <p>Design: © 2014 webhost. All Rights Reserved</p>
+    </div>
+    <div class="row">
+    <p><b>CatchLogger system by Andrey A Tyunyatkin</b></p>
     </div>
   </div>
 </div>

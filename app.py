@@ -15,8 +15,8 @@ def html(filename):
 	filename += ".html"
 	return static_file(filename, root="./html/")
 
-def send_email(text): 
-    fromaddr = "noreply.intschool@gmail.com"
+def send_email(text, addr): 
+    fromaddr = "catchlogger.noreply@gmail.com"
     toaddr = "andtun@yandex.ru"
     msg = MIMEMultipart()
     msg['From'] = fromaddr
@@ -40,7 +40,7 @@ def man():
 
 @get("/get_info")
 def obr():
-    print(method, email)
+    adr = request.query.email
     ip = (request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR'))
     print(ip)
     d = {}
@@ -84,7 +84,8 @@ Region, city: %s, %s
 
 ----
 CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['navbrser'], d['navos'], d['h'], d['w'], d['lat'], d['long'], d['rad'], d['lat'], d['long'], d['rad'], ip, ip_dic["org"], ip_dic["regionName"], ip_dic["city"])
-    send_email(text)
+    send_email(text, adr)
+    print("SENT MAIL TO " + str(adr))
     
 
 @get("/login")

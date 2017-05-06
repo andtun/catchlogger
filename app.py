@@ -95,6 +95,9 @@ CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['
 def login():
 	return html("login")
 
+@get("/testt")
+def a():
+	return template(html("tao"), name="TESTsuccEss")
 
 @get("/locvar_access")
 def lcvr():

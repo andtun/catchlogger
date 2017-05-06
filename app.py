@@ -91,10 +91,6 @@ CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['
 def login():
 	return html("login")
 
-@get("/testt")
-def a():
-	return template(html("tao"), name="TESTsuccEss")
-
 @get("/locvar_access")
 def lcvr():
     lat = request.query['lat']
@@ -154,9 +150,10 @@ def br():
 #def fff(error):
 #    return html("404")
 
-@error(500)
-def fff(error):
-    return html("500")
+#@error(500)
+
+#def fff(error):
+#    return html("500")
 # -------------------------------------------------------------
     
 run(host="0.0.0.0", port=os.environ.get('PORT', 5000), debug=True)

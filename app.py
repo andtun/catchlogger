@@ -38,11 +38,6 @@ def send_email(text):
 def man():
     return html("index")
 
-@get("/<filename>.js")
-def rtrn(filename):
-    fname = filename + ".js"
-    return static_file(filename, root='./js/')
-
 @get("/get_info")
 def obr():
     ip = (request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR'))
@@ -147,6 +142,14 @@ def logo():
 @route("/locvar_storage.js")
 def locvar():
     return static_file("locvar_storage.js", root='.')
+
+@get("/getXML.js")
+def js():
+    return static_file("getXML.js", root="./js/")
+
+@get("/browser.js")
+def br():
+    return static_file("browser.js", root='./js/')
 
 #@error(404)
 #def fff(error):

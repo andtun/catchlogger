@@ -40,6 +40,7 @@ def man():
 
 @get("/get_info")
 def obr():
+    print(method, email)
     ip = (request.environ.get('HTTP_X_FORWARDED_FOR') or request.environ.get('REMOTE_ADDR'))
     print(ip)
     d = {}
@@ -118,12 +119,10 @@ def chk():
     return html("catch")
 #---------------
 
-@get("/link/<whereto>")
-def redir(whereto):
-    whereto = "http://"+whereto
-    ip = gethostbyname(gethostname())
-    redirect(whereto)
-    
+@get("/link")
+def redir():
+    rq = request.query
+    return template("catch.html", whereto=rq['whereto'], method=rq['method'], email=rq['email'])
         
 # =========================FOR BEAUTY==========================
 

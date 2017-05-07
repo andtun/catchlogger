@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 
 class DataBase:
     name = 'UserList.db'
@@ -34,5 +35,14 @@ def createTable(uname):
 
 def createLinkTable(uname, link):
     tablename = uname + "_" + link
-    db.query("CREATE TABLE %S (addr_num INTEGER PRIMARY KEY)") % tablename  # not yet ready!!!
+    db.query("CREATE TABLE %S (addr_num INTEGER PRIMARY KEY);") % tablename
+
+def create_user(username, pw, email):
+    cmnd = "INSERT INTO Auth VALUES ('%s', '%s', '%s', 0);" % (username, pw, email)
+    db.query(cmnd)
+
+def set_timestamp(username):
+    now = str(int(datetime.datetime.timestamp(datetime.datetime.now())))
+    cmnd = "UPDATE Auth SET last_active=%s WHERE uname=%s;" % (now, username)
+
 

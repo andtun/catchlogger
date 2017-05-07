@@ -123,7 +123,7 @@ def redir():
 
 @post("/createlink/<method>")
 def prcss(method):
-    rf = request.forms
+    return request.forms.get("email")
     howto = rf.get("howto")
     if method == "by_email":
         if howto == "normal":

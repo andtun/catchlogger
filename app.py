@@ -25,7 +25,7 @@ def shorten(link):
 
 def send_email(text, addr): 
     fromaddr = "catchlogger.noreply@gmail.com"
-    toaddr = "andtun@yandex.ru"
+    toaddr = addr
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr

@@ -83,7 +83,7 @@ function sendform() {
   r.send(tosend);
   r.onreadystatechange = function() {
     if (r.readyState == 4 && r.status == 200) {
-      document.getElementById("yourlink").innerHTML = r.responseText;
+      document.getElementById("yourlink").innerHTML = "Ваша ссылка: " + r.responseText;
     }
  } 
 }
@@ -228,7 +228,7 @@ function sendform() {
     <div class="row main-head">
       <div class="col-md-12">
         <h1>Подробнее о сервисе</h1>
-        <h2>Как <a href="#">создать ссылку? </a></h2>
+        <h2>Как <a href="#bottom">создать ссылку? </a></h2>
         <p>Вводите сайт, на который она ведёт. Вводите свой email - на него будет приходить информация о проходах по ссылке, если у Вас нет аккаунта в той системе. Выбираете сервис, с помощью которого будет сгенерирована короткая ссылка. Нажимаете кнопочку и получаете ссылку, которую затем можете, например, отправить другу:) <br>
           <br>
           <br>
@@ -290,7 +290,7 @@ function sendform() {
         </div>
         <p class="search-area"> <button type="submit" class="search-btn">Создать! </button> </p>
         </form>
-        <span id="yourlink" style="color: #FFFFFF; font-size: 20px;">yalink</span>
+        <span id="yourlink" style="color: #FFFFFF; font-size: 20px;"> </span>
       </div>
     </div>
   </div>

@@ -1,0 +1,7 @@
+Create pretty email template (using IP-API)
+
+Create auth logic, frontend for registered users' links
+
+Delete unused stuff
+
+Etc

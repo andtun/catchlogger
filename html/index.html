@@ -81,7 +81,6 @@ function sendform() {
   var redir = document.getElementById("link_addr").value;
   var tosend = "howto="+method+"&email="+email+"&link_addr="+redir;
   r.send(tosend);
-  alert(tosend)
   r.onreadystatechange = function() {
     if (r.readyState == 4 && r.status == 200) {
       document.getElementById("yourlink").innerHTML = r.responseText;

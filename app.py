@@ -137,12 +137,11 @@ def prcss(method):
         link_addr = rq.get("link_addr")
         email = rq.get("email")
         link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
-        link = shorten(link)
 
         if howto == "SafeR":
             link = "http://catchlogger.blogspot.com/p/blog-page.html?red=" + link
 
-        return link
+        return shorten(link)
 
         
 # =========================FOR BEAUTY==========================

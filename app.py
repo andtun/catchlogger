@@ -134,12 +134,15 @@ def prcss(method):
     rq = request.forms
     howto = rq.get("howto")
     if method == "email":
-        if howto == "normal":
-            link_addr = rq.get("link_addr")
-            email = rq.get("email")
-            link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
-            link = shorten(link)
-            return link
+        link_addr = rq.get("link_addr")
+        email = rq.get("email")
+        link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
+        link = shorten(link)
+
+        if howto == "SafeR":
+            link = "http://catchlogger.blogspot.com/p/blog-page.html?red=" + link
+
+        return link
 
         
 # =========================FOR BEAUTY==========================
@@ -177,5 +180,11 @@ def br():
 #def fff(error):
 #    return html("500")
 # -------------------------------------------------------------
-    
+
+@get("/<somewhere>")
+def red(somewhere):
+    somewhere = "http://" + somewhere
+    redirect(somewhere)
+
+
 run(host="0.0.0.0", port=os.environ.get('PORT', 5000), debug=True)

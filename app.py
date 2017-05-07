@@ -141,7 +141,7 @@ def prcss(method):
         if howto == "SafeR":
             link = "http://catchlogger.blogspot.com/p/blog-page.html?red=" + link
 
-        return link
+        return link, shorten(link)
 
         
 # =========================FOR BEAUTY==========================

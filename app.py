@@ -120,6 +120,18 @@ def chk():
 def redir():
     rq = request.query
     return template("catch.html", whereto=rq['whereto'], method=rq['method'], email=rq['email'])
+
+@post("/createlink/<method>")
+def prcss(method):
+    rf = request.forms
+    howto = rf.get("howto")
+    if method == "by_email":
+        if howto == "normal":
+            link_addr = rq.get("link_addr")
+            email = rq.get("email")
+            link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
+            return link
+
         
 # =========================FOR BEAUTY==========================
 

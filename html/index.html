@@ -31,7 +31,7 @@
 
 <!--=================================GOOGLE FONT - OPEN SANS==============================-->
 
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800' rel='stylesheet' type='text/css'>
 <!--=============================jquery.js==============================-->
 
 <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
@@ -70,6 +70,23 @@ function getshorturl() {
      console.log(urls)
      if (urls.match(/^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/)) {f.submit();}
      else {alert("notok URL")}
+}
+
+function sendform() {
+  var r = new XMLHttpRequest();
+  r.open("POST", "/createlink/email");
+  r.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  var method = document.getElementById("m").value;
+  var email = document.getElementById("email").value;
+  var redir = document.getElementById("link_addr").value;
+  var tosend = "howto="+method+"&email="+email+"&link_addr="+redir;
+  r.send(tosend);
+  r.onreadystatechange = function() {
+    if (r.readyState == 4 && http.status == 200) {
+      document.getElementById("yourlink").innerHTML = r.responseText;
+    }
+  }
+  link = r.responseText()
 }
 
     </script>
@@ -223,7 +240,7 @@ function getshorturl() {
           <br>
         </p>
         <h2>Зачем это надо?</h2>
-        Этот вопрос поставил меня в тупик. Ответ на него появится чуть позже (если вообще появится). Ну вообще, можете сказать другу, тип вы крутые хуцкеры и вычислили его па_айпи))0) Или проверить, правда ли он охуел в Нью-Йорк к друзьям, а не в Саранск к бабушке:D <br>
+        Этот вопрос поставил меня в тупик. Ответ на него появится чуть позже (если вообще появится). Ну вообще, можете сказать другу, тип вы крутые хуцкеры и вычислили его па_айпи))0) Или проверить, правда ли он уехал в Нью-Йорк к друзьям, а не в Саранск к бабушке:D <br>
           <br>
           <br>
         </p>
@@ -233,7 +250,7 @@ function getshorturl() {
           <br>
         </p>
         <h2>Ты написал всё это сам???</h2>
-        <p>Конечно, нет. Кто, как и чем мне помог, можно посмотреть в <a href="/spasibi">спасибах</a>.<br> Весь проект можно посмотреть по <a>этой ссылке</a>. <b>Кстати, если просмотреть этот быдлокод, мб можно понять, что у сайта есть одна дыра в безопасности. Найдёте её, сконтачите со мной - с меня шоколадка и объяснение, почему я её не залатал:)</b>
+        <p>Конечно, нет. Кто, как и чем мне помог, можно посмотреть в <a href="/spasibi">спасибах</a>.<br> Весь проект можно посмотреть по <a href="https://github.com/andtun/catchlogger/tree/master" target="_blank">этой ссылке</a>. <b>Кстати, если просмотреть этот быдлокод, мб можно понять, что у сайта есть одна дыра в безопасности. Найдёте её, сконтачите со мной - с меня шоколадка и объяснение, почему я её не залатал:)</b>
           <br>
           <br>
         </p>
@@ -260,11 +277,12 @@ function getshorturl() {
     <div class="row">
       <div class="col-md-8 col-md-offset-2" >
         <div class="input-append">
-        <form action="/createlink/by_email" method="GET">
-        <input style="width: 97%; margin-bottom: 20px;" type="email" name="email" id="address"  required="required" class="newsletter-form" placeholder="Адрес email" data-validate="validate(required, email)">
-          <input class="search" type="text" name="link_addr" placeholder="Сайт, на который будет вести ссылка" style="height: 58px;">
+
+        <form action="javascript:sendform();">
+        <input style="width: 97%; margin-bottom: 20px;" type="email" name="email" id="email"  required="required" class="newsletter-form" placeholder="Ваш адрес email" data-validate="validate(required, email)">
+          <input class="search" type="text" name="link_addr" id="link_addr" placeholder="Сайт, на который будет вести ссылка" style="height: 58px;">
           <div class="btn-group">
-            <select name="shorturl_prov" class="btn dropdown-toggle" data-toggle="dropdown" style="height: 58px;"> ?? <span class="caret"></span>
+            <select name="shorturl_prov" id="m" class="btn dropdown-toggle" data-toggle="dropdown" style="height: 58px;"> ?? <span class="caret"></span>
 
               <option>SafeR</option>
               <option>normal</option>
@@ -273,6 +291,7 @@ function getshorturl() {
         </div>
         <p class="search-area"> <button type="submit" class="search-btn">Создать! </button> </p>
         </form>
+        <span id="yourlink">yalink</span>
       </div>
     </div>
   </div>

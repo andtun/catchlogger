@@ -15,6 +15,14 @@ def html(filename):
 	filename += ".html"
 	return static_file(filename, root="./html/")
 
+def shorten(link):
+    url = "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyAKytZN_unLk1FNtcISeYoWIcm2d8jSPXU"
+    header = {'Content-Type': 'application/json'}
+    r = requests.post(url, json={"longUrl": link}, headers=header)
+    r = json.loads(r.text)
+    r = r["id"]
+    return r
+
 def send_email(text, addr): 
     fromaddr = "catchlogger.noreply@gmail.com"
     toaddr = "andtun@yandex.ru"
@@ -124,13 +132,13 @@ def redir():
 @post("/createlink/<method>")
 def prcss(method):
     rq = request.forms
-    return rq.get("email")
     howto = rf.get("howto")
-    if method == "by_email":
+    if method == "email":
         if howto == "normal":
             link_addr = rq.get("link_addr")
             email = rq.get("email")
             link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
+            link = shorten(link)
             return link
 
         

@@ -82,11 +82,10 @@ function sendform() {
   var tosend = "howto="+method+"&email="+email+"&link_addr="+redir;
   r.send(tosend);
   r.onreadystatechange = function() {
-    if (r.readyState == 4 && http.status == 200) {
+    if (r.readyState == 4 && r.status == 200) {
       document.getElementById("yourlink").innerHTML = r.responseText;
     }
-  }
-  link = r.responseText()
+ } 
 }
 
     </script>
@@ -291,7 +290,7 @@ function sendform() {
         </div>
         <p class="search-area"> <button type="submit" class="search-btn">Создать! </button> </p>
         </form>
-        <span id="yourlink">yalink</span>
+        <span id="yourlink" style="color: #FFFFFF; font-size: 18px;">yalink</span>
       </div>
     </div>
   </div>

@@ -90,6 +90,8 @@ IP = %s
 Provider: %s
 Region, city: %s, %s
 
+PS Android - тоже Linux (!)
+
 ----
 CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['navbrser'], d['navos'], d['h'], d['w'], d['lat'], d['long'], d['rad'], d['lat'], d['long'], d['rad'], ip, ip_dic["org"], ip_dic["regionName"], ip_dic["city"])
     send_email(text, adr)

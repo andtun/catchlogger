@@ -47,7 +47,9 @@ def send_email(text, addr):
     server.starttls()
     server.login(fromaddr, "adminpsw")
     text = msg.as_string()
+    print("start sending")
     server.sendmail(fromaddr, toaddr, text)
+    print("end sending")
     server.quit()
 
 

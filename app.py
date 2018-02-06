@@ -64,7 +64,7 @@ def prcss(method):
     if method == "email":
         link_addr = rq.get("link_addr")
         email = rq.get("email")
-        link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
+        link = "https://cl.jkdev.ru/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
 
         return shorten(link)
 

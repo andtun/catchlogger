@@ -15,7 +15,7 @@ Location:
 latitude: %s
 longitude: %s
 Radius: %s
-Location link: http://catchlogger.herokuapp.com/locvar_access?lat=%s&lng=%s&rad=%s
+Location link: <a href="http://catchlogger.herokuapp.com/locvar_access?lat=%s&lng=%s&rad=%s">here</a>
 
 IP = %s
 Provider: %s

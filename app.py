@@ -29,7 +29,7 @@ def shorten(link):
 
 def send_simple_message(text, adr):
     return requests.post(
-        "https://api.mailgun.net/v3/catchlogger.jkdev.ru/messages",
+        "https://api.mailgun.net/v3/%s/messages" % os.environ['MAILGUN_DOMAIN'],
         auth=("api", os.environ['MAILGUN_API_KEY']),
         data={"from": "CatchLogger NoReply <catchlogger@jkdev.ru>",
               "to": [adr],
